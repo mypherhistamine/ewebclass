@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "384942232277",
+    "project_id": "e-web-class",
+    "storage_bucket": "e-web-class.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384942232277:android:50a5ecb51f7eeafb89085c",
+        "android_client_info": {
+          "package_name": "com.example.ewebclass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384942232277-bmqaooe5h67gh4kjm887s7e2at938bik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0L7mFzb5oaH-UPU_IHz9blDQCAUa5_QM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384942232277-bmqaooe5h67gh4kjm887s7e2at938bik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
