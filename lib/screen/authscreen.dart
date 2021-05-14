@@ -1,4 +1,5 @@
 import 'package:ewebclass/controllers/userdata.dart';
+import 'package:ewebclass/screen/home.dart';
 import 'package:get/get.dart';
 
 import '../widget/authform.dart';
@@ -42,6 +43,7 @@ class _AuthPageState extends State<AuthPage> {
         getXController.hasSubmitted.value = true;
         getXController.userloggedIn.value = true;
         getXController.submitDetails();
+        Navigator.of(context).popAndPushNamed(HomePage.routeName);
         // FirebaseFirestore.instance
         //     .collection('users')
         //     .doc(authResult.user.uid)

@@ -27,31 +27,33 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // initialRoute: '/',
-      home: Obx(
-        () {
-          if (getcontroller.userloggedIn.value == true) {
-            return HomePage();
-          } else {
-            return AuthPage();
-          }
+      // home: Obx(
+      //   () {
+      //     if (getcontroller.userloggedIn.value == true) {
+      //       return HomePage();
+      //     } else {
+      //       return AuthPage();
+      //     }
 
-          // HomePage()
+      //     // HomePage()
+      //   },
+      // ),
+      
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, userSnapshot) {
+          if (userSnapshot.hasData) {
+            //return ChatPage();
+            return HomePage();
+          }
+          return AuthPage();
         },
       ),
-      routes: {ProfilePage.profileRoute: (context) => ProfilePage()},
-    );
 
-    //TODO: old code
-    //   StreamBuilder(
-    //     stream: FirebaseAuth.instance.authStateChanges(),
-    //     builder: (context, userSnapshot) {
-    //       if (userSnapshot.hasData) {
-    //         //return ChatPage();
-    //         return HomePage();
-    //       }
-    //       return AuthPage();
-    //     },
-    //   ),
-    // );
+      routes: {
+        // '/': (context) => AuthPage(),
+        ProfilePage.profileRoute: (context) => ProfilePage()
+      },
+    );
   }
 }

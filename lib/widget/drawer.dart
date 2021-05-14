@@ -50,6 +50,7 @@ class MyDrawer extends StatelessWidget {
             onTap: () {
               FirebaseAuth.instance.signOut();
               studentController.userloggedIn.value = false;
+              Navigator.popAndPushNamed(context, '/');
             },
           ),
         ],

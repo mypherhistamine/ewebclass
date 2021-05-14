@@ -115,7 +115,7 @@ class ProfilePage extends StatelessWidget {
               onTap: () {
                 FirebaseAuth.instance.signOut();
                 studentController.userloggedIn.value = false;
-                Navigator.of(context).popAndPushNamed(ProfilePage.profileRoute);
+                Navigator.popAndPushNamed(context, '/');
               },
             ),
           ],
