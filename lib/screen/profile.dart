@@ -69,9 +69,13 @@ class ProfilePage extends StatelessWidget {
                   Container(
                     height: 150,
                     width: 150,
-                    child: ClipOval(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(120),
                       child: Container(
-                        color: Colors.grey,
+                        child: Image.network(
+                          "https://i.ibb.co/vVRHdMy/me.jpg",
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                   ),
