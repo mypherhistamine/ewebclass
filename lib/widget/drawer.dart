@@ -1,4 +1,5 @@
 import 'package:ewebclass/controllers/userdata.dart';
+import 'package:ewebclass/screen/course_material.dart';
 import 'package:ewebclass/screen/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,7 +34,9 @@ class MyDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             title: Text('Course Materials'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).popAndPushNamed(CourseMaterials.routeName);
+            },
           ),
           Divider(),
           ListTile(

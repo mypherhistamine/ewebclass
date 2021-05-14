@@ -33,121 +33,125 @@ class ProfilePage extends StatelessWidget {
     final heightRatio = size.height / 820;
 
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => EditProfileScreen()),
-                );
-              })
-        ],
-        title: Text("Profile"),
-      ),
-      body: Container(
-        height: size.height,
-        width: size.width,
-        child: StreamBuilder<DocumentSnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('users')
-                .doc(studentController.authResultId.value)
-                .snapshots(),
-            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-              if (snapshot.hasData) {
-                studentController.city.value = snapshot.data['city'];
-                studentController.regNo.value = snapshot.data['regNo'];
+        appBar: AppBar(
+          actions: [
+            IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditProfileScreen()),
+                  );
+                })
+          ],
+          title: Text("Profile"),
+        ),
+        body: Container(
+          height: size.height,
+          width: size.width,
+          child: StreamBuilder<DocumentSnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(studentController.authResultId.value)
+                  .snapshots(),
+              builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  studentController.city.value = snapshot.data['city'];
+                  studentController.regNo.value = snapshot.data['regNo'];
 
-                print(studentController.city.value);
-              }
+                  print(studentController.city.value);
+                }
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 30),
-                  Container(
-                    height: 150,
-                    width: 150,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(120),
-                      child: Container(
-                        child: Image.network(
-                          "https://i.ibb.co/vVRHdMy/me.jpg",
-                          fit: BoxFit.fill,
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 30),
+                    Container(
+                      height: 150,
+                      width: 150,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(120),
+                        child: Container(
+                          child: Image.network(
+                            "https://i.ibb.co/vVRHdMy/me.jpg",
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  Text("${snapshot.data['username']}", style: nameStyle),
-                  SizedBox(height: 20),
-                  rightAlignText(
-                      text:
-                          "Reg No - ${snapshot.data['regNo'].toString().toUpperCase()}"),
-                  SizedBox(height: 20),
-                  rightAlignText(text: "School - ${snapshot.data['school']}"),
-                  SizedBox(height: 20),
-                  rightAlignText(text: "Email - ${snapshot.data['email']}"),
-                  SizedBox(height: 20),
-                  rightAlignText(
-                      text: "Mobile No - ${snapshot.data['mobileNo']}"),
-                  SizedBox(height: 20),
-                  rightAlignText(text: "Address - ${snapshot.data['address']}"),
-                  SizedBox(height: 20),
-                  rightAlignText(text: "City - ${snapshot.data['city']}")
-                ],
-              );
-            }),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('E-Web Class'),
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Profile'),
-              onTap: () {
-                Navigator.of(context).popAndPushNamed(ProfilePage.profileRoute);
-              },
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Course Materials'),
-              onTap: () {},
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Quizzes-Assignments'),
-              onTap: () {},
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Discussion Interface'),
-              onTap: () {},
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Help'),
-              onTap: () {},
-            ),
-            Divider(),
-            ListTile(
-              title: Text('Logout'),
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-                studentController.userloggedIn.value = false;
-                Navigator.popAndPushNamed(context, '/');
-              },
-            ),
-          ],
+                    SizedBox(height: 20),
+                    Text("${snapshot.data['username']}", style: nameStyle),
+                    SizedBox(height: 20),
+                    rightAlignText(
+                        text:
+                            "Reg No - ${snapshot.data['regNo'].toString().toUpperCase()}"),
+                    SizedBox(height: 20),
+                    rightAlignText(text: "School - ${snapshot.data['school']}"),
+                    SizedBox(height: 20),
+                    rightAlignText(text: "Email - ${snapshot.data['email']}"),
+                    SizedBox(height: 20),
+                    rightAlignText(
+                        text: "Mobile No - ${snapshot.data['mobileNo']}"),
+                    SizedBox(height: 20),
+                    rightAlignText(
+                        text: "Address - ${snapshot.data['address']}"),
+                    SizedBox(height: 20),
+                    rightAlignText(text: "City - ${snapshot.data['city']}")
+                  ],
+                );
+              }),
         ),
-      ),
-    );
+        drawer: MyDrawer(context)
+
+        // Drawer(
+        //   child: ListView(
+        //     children: [
+        //       DrawerHeader(
+        //         decoration: BoxDecoration(
+        //           color: Colors.blue,
+        //         ),
+        //         child: Text('E-Web Class'),
+        //       ),
+        //       Divider(),
+        //       ListTile(
+        //         title: Text('Profile'),
+        //         onTap: () {
+        //           Navigator.of(context).popAndPushNamed(ProfilePage.profileRoute);
+        //         },
+        //       ),
+        //       Divider(),
+        //       ListTile(
+        //         title: Text('Course Materials'),
+        //         onTap: () {},
+        //       ),
+        //       Divider(),
+        //       ListTile(
+        //         title: Text('Quizzes-Assignments'),
+        //         onTap: () {},
+        //       ),
+        //       Divider(),
+        //       ListTile(
+        //         title: Text('Discussion Interface'),
+        //         onTap: () {},
+        //       ),
+        //       Divider(),
+        //       ListTile(
+        //         title: Text('Help'),
+        //         onTap: () {},
+        //       ),
+        //       Divider(),
+        //       ListTile(
+        //         title: Text('Logout'),
+        //         onTap: () {
+        //           FirebaseAuth.instance.signOut();
+        //           studentController.userloggedIn.value = false;
+        //           Navigator.popAndPushNamed(context, '/');
+        //         },
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        );
   }
 }
