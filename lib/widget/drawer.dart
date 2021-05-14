@@ -23,28 +23,34 @@ class MyDrawer extends StatelessWidget {
             ),
             child: Text('E-Web Class'),
           ),
+          Divider(),
           ListTile(
             title: Text('Profile'),
             onTap: () {
               Navigator.of(context).popAndPushNamed(ProfilePage.profileRoute);
             },
           ),
+          Divider(),
           ListTile(
             title: Text('Course Materials'),
             onTap: () {},
           ),
+          Divider(),
           ListTile(
             title: Text('Quizzes-Assignments'),
             onTap: () {},
           ),
+          Divider(),
           ListTile(
             title: Text('Discussion Interface'),
             onTap: () {},
           ),
+          Divider(),
           ListTile(
             title: Text('Help'),
             onTap: () {},
           ),
+          Divider(),
           ListTile(
             title: Text('Logout'),
             onTap: () {

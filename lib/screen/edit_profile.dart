@@ -11,12 +11,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final userDataController = Get.put(StudentData());
   @override
   void initState() {
+    super.initState();
     nameController.text = userDataController.userName.value;
     regController.text = userDataController.regNo.value;
     schController.text = userDataController.school.value;
     emailController.text = userDataController.userEmail.value;
     phoneController.text = userDataController.mobileNo.value;
     addressController.text = userDataController.address.value;
+    cityController.text = userDataController.city.value;
   }
 
   TextEditingController nameController = new TextEditingController();
@@ -25,6 +27,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
   TextEditingController addressController = new TextEditingController();
+  TextEditingController cityController = new TextEditingController();
   final getXController = Get.put(StudentData());
 
   bool isSubmitting = false;
@@ -63,6 +66,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     elevation: 8,
                     child: TextField(
                       decoration: InputDecoration(
+                          labelText: 'Name',
                           contentPadding: EdgeInsets.all(10),
                           hintText: 'Name',
                           border: InputBorder.none),
@@ -80,13 +84,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Row(
                         children: [
                           Text(
-                            "${getXController.regNo}",
-                            style: TextStyle(fontSize: 16, color: Colors.black38),
+                            "${getXController.regNo.toUpperCase()}",
+                            style:
+                                TextStyle(fontSize: 16, color: Colors.black38),
                           ),
                           SizedBox(width: 10),
                           Text(
-                            "This field can't be changed",
-                            style: TextStyle(fontSize: 16, color: Colors.black38),
+                            "*This field can't be changed",
+                            style: TextStyle(
+                                fontSize: 16, color: Colors.redAccent),
                           )
                         ],
                       ),
@@ -99,6 +105,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     elevation: 8,
                     child: TextField(
                       decoration: InputDecoration(
+                          labelText: 'School',
                           contentPadding: EdgeInsets.all(10),
                           hintText: 'School',
                           border: InputBorder.none),
@@ -111,6 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     elevation: 8,
                     child: TextField(
                       decoration: InputDecoration(
+                          labelText: 'Email',
                           contentPadding: EdgeInsets.all(10),
                           hintText: 'Email',
                           border: InputBorder.none),
@@ -123,6 +131,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     elevation: 8,
                     child: TextField(
                       decoration: InputDecoration(
+                          labelText: 'Contact No',
                           contentPadding: EdgeInsets.all(10),
                           hintText: 'Mobile No',
                           border: InputBorder.none),
@@ -135,6 +144,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     elevation: 8,
                     child: TextField(
                       decoration: InputDecoration(
+                          labelText: 'Address',
                           contentPadding: EdgeInsets.all(10),
                           hintText: 'Address',
                           border: InputBorder.none),
@@ -142,44 +152,70 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
                 ),
+                Container(
+                  child: Card(
+                    elevation: 8,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          labelText: 'City',
+                          contentPadding: EdgeInsets.all(10),
+                          hintText: 'City',
+                          border: InputBorder.none),
+                      controller: cityController,
+                    ),
+                  ),
+                ),
                 !isSubmitting
-                    ? ElevatedButton(
-                        onPressed: () async {
-                          setState(() {
-                            isSubmitting = true;
-                          });
-                          userDataController.userName.value =
-                              nameController.text;
-                          userDataController.regNo.value = regController.text;
-                          userDataController.school.value = schController.text;
-                          userDataController.userEmail.value =
-                              emailController.text;
-                          userDataController.mobileNo.value =
-                              phoneController.text;
-                          userDataController.address.value =
-                              addressController.text;
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 50),
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              setState(() {
+                                isSubmitting = true;
+                              });
+                              userDataController.userName.value =
+                                  nameController.text;
 
-                          userDataController.ocenia();
-                          await userDataController.changeDetails();
-                          setState(() {
-                            isSubmitting = false;
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            backgroundColor: Colors.blueAccent,
-                            content:
-                                const Text('Your Profile has been updated'),
-                            duration: const Duration(seconds: 2),
-                            // action: SnackBarAction(
-                            //   label: 'Your Profile has been updated',
-                            //   onPressed: () {},
-                            // ),
-                          ));
-                        },
-                        child: Text("Edit Profile"))
+                              userDataController.school.value =
+                                  schController.text;
+                              userDataController.userEmail.value =
+                                  emailController.text;
+                              userDataController.mobileNo.value =
+                                  phoneController.text;
+                              userDataController.address.value =
+                                  addressController.text;
+
+                              userDataController.ocenia();
+                              await userDataController.changeDetails();
+                              setState(() {
+                                isSubmitting = false;
+                              });
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                backgroundColor: Colors.blueAccent,
+                                content:
+                                    const Text('Your Profile has been updated'),
+                                duration: const Duration(seconds: 2),
+                                // action: SnackBarAction(
+                                //   label: 'Your Profile has been updated',
+                                //   onPressed: () {},
+                                // ),
+                              ));
+                            },
+                            child: Text("Edit Profile")),
+                      )
                     : Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: CircularProgressIndicator(),
-                      )
+                      ),
+                SizedBox(height: 10),
+                Container(
+                  width: 300,
+                  child: Text(
+                    " * Your registration number is managed by your organization. To change your registration number please contact the the admin, for more details check the help section ",
+                    style: TextStyle(fontSize: 16, color: Colors.redAccent),
+                  ),
+                )
               ],
             ),
           ),
