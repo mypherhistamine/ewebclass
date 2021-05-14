@@ -30,6 +30,21 @@ class StudentData extends GetxController {
     });
   }
 
+  Future<void> changeDetails() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(authResultId.value)
+        .update({
+      'username': userName.value,
+      'email': userEmail.value,
+      'address': address.value,
+      'school': school.value,
+      'mobileNo': mobileNo.value,
+      'city': city.value,
+      'regNo': regNo.value
+    });
+  }
+
   void ocenia() {
     print(userName);
     print(userEmail);

@@ -1,4 +1,5 @@
 import 'package:ewebclass/controllers/userdata.dart';
+import 'package:ewebclass/screen/edit_profile.dart';
 import 'package:ewebclass/widget/drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,17 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        actions: [IconButton(icon: Icon(Icons.edit), onPressed: () {})],
+        actions: [
+          IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditProfileScreen()),
+                );
+              })
+        ],
         title: Text("Profile"),
       ),
       body: Container(
