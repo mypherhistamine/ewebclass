@@ -1,3 +1,4 @@
+import 'package:ewebclass/widget/drawer.dart';
 import 'package:flutter/material.dart';
 
 class QuizAndAssignmentScreen extends StatefulWidget {
@@ -12,6 +13,7 @@ class _QuizAndAssignmentScreenState extends State<QuizAndAssignmentScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      drawer: MyDrawer(context),
       appBar: AppBar(
         title: Text("Quizzes and Assignments"),
       ),

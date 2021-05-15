@@ -62,7 +62,6 @@ class ProfilePage extends StatelessWidget {
 
                   print(studentController.city.value);
                 }
-
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

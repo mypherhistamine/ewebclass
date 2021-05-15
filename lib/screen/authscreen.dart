@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/home.dart';
+import 'package:ewebclass/utils.dart/theme.dart';
 import 'package:get/get.dart';
 
 import '../widget/authform.dart';
@@ -89,18 +92,32 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(height: 40),
-            Text('E Class', style: TextStyle(fontSize: 50)),
-            AuthForm(
-              _submitAuthForm,
-              _isLoading,
-            ),
-          ],
+        child: Container(
+          height: size.height,
+          width: size.width,
+          decoration: BoxDecoration(color: Utils.bgColor2
+              // gradient: LinearGradient(
+              //     transform: GradientRotation(pi / 2), colors: Utils.bgColor)
+              // image: DecorationImage(
+              //   fit: BoxFit.fill,
+              //   image: AssetImage('assets/images/bg.jpg'),
+              // ),
+              ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 40),
+              Text('E Class', style: TextStyle(fontSize: 50)),
+              Opacity(
+                opacity: 1,
+                child: AuthForm(
+                  _submitAuthForm,
+                  _isLoading,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

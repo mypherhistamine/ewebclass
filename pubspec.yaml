@@ -57,6 +57,8 @@ flutter:
     - assets/icons/doc.png
     - assets/icons/pdf.png
     - assets/icons/ppt.png
+    - assets/images/bg.jpg
+    - assets/images/bg2.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

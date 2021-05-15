@@ -53,16 +53,15 @@ class _AuthFormState extends State<AuthForm> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Card(
-        margin: EdgeInsets.all(20),
-        child: Container(
-          padding: EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                TextFormField(
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Card(
+                child: TextFormField(
                   key: ValueKey('email'),
                   validator: (value) {
                     if (value.isEmpty || !value.contains('@')) {
@@ -71,15 +70,20 @@ class _AuthFormState extends State<AuthForm> {
                     return null;
                   },
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(labelText: 'Email address'),
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 10),
+                      border: InputBorder.none,
+                      labelText: 'Email address'),
                   onSaved: (value) {
                     _userEmail = value;
                     getXController.ocenia();
                     getXController.userEmail.value = value;
                   },
                 ),
-                if (!_isLogin)
-                  TextFormField(
+              ),
+              if (!_isLogin)
+                Card(
+                  child: TextFormField(
                     key: ValueKey('username'),
                     validator: (value) {
                       if (value.isEmpty || value.length < 4) {
@@ -87,15 +91,21 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'Username'),
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                      contentPadding: EdgeInsets.only(left: 10),
+                      border: InputBorder.none,
+                    ),
                     onSaved: (value) {
                       _userName = value;
                       getXController.ocenia();
                       getXController.userName.value = value;
                     },
                   ),
-                if (!_isLogin)
-                  TextFormField(
+                ),
+              if (!_isLogin)
+                Card(
+                  child: TextFormField(
                     key: ValueKey('regNo'),
                     validator: (value) {
                       print(value.substring(2, 5).toLowerCase());
@@ -105,6 +115,8 @@ class _AuthFormState extends State<AuthForm> {
                       return null;
                     },
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 10),
+                        border: InputBorder.none,
                         labelText: 'Registration number (in small letters)'),
                     onSaved: (value) {
                       regNo = value;
@@ -112,8 +124,10 @@ class _AuthFormState extends State<AuthForm> {
                       getXController.regNo.value = value;
                     },
                   ),
-                if (!_isLogin)
-                  TextFormField(
+                ),
+              if (!_isLogin)
+                Card(
+                  child: TextFormField(
                     key: ValueKey('school'),
                     validator: (value) {
                       print(value.substring(2, 5).toLowerCase());
@@ -123,14 +137,20 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'School'),
+                    decoration: InputDecoration(
+                      labelText: 'School',
+                      contentPadding: EdgeInsets.only(left: 10),
+                      border: InputBorder.none,
+                    ),
                     onSaved: (value) {
                       getXController.ocenia();
                       getXController.school.value = value;
                     },
                   ),
-                if (!_isLogin)
-                  TextFormField(
+                ),
+              if (!_isLogin)
+                Card(
+                  child: TextFormField(
                     key: ValueKey('mobileNo'),
                     validator: (value) {
                       if (value.isEmpty || value.length < 10) {
@@ -138,15 +158,20 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'Mobile Number'),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 10),
+                        border: InputBorder.none,
+                        labelText: 'Mobile Number'),
                     onSaved: (value) {
                       // mobileNo = value;
                       getXController.ocenia();
                       getXController.mobileNo.value = value;
                     },
                   ),
-                if (!_isLogin)
-                  TextFormField(
+                ),
+              if (!_isLogin)
+                Card(
+                  child: TextFormField(
                     key: ValueKey('address'),
                     validator: (value) {
                       if (value.isEmpty) {
@@ -154,15 +179,20 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'Address'),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 10),
+                        border: InputBorder.none,
+                        labelText: 'Address'),
                     onSaved: (value) {
                       // address = value;
                       getXController.ocenia();
                       getXController.address.value = value;
                     },
                   ),
-                if (!_isLogin)
-                  TextFormField(
+                ),
+              if (!_isLogin)
+                Card(
+                  child: TextFormField(
                     key: ValueKey('city'),
                     validator: (value) {
                       if (value.isEmpty) {
@@ -170,14 +200,19 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'City'),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 10),
+                        border: InputBorder.none,
+                        labelText: 'City'),
                     onSaved: (value) {
                       // city = value;
                       getXController.ocenia();
                       getXController.city.value = value;
                     },
                   ),
-                TextFormField(
+                ),
+              Card(
+                child: TextFormField(
                   key: ValueKey('password'),
                   validator: (value) {
                     if (value.isEmpty || value.length < 7) {
@@ -185,37 +220,40 @@ class _AuthFormState extends State<AuthForm> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(left: 10),
+                      border: InputBorder.none,
+                      labelText: 'Password'),
                   obscureText: true,
                   onSaved: (value) {
                     _userPassword = value;
                   },
                 ),
-                SizedBox(
-                  height: 10,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              if (widget.isLoading) CircularProgressIndicator(),
+              if (!widget.isLoading)
+                RaisedButton(
+                  child: Text(_isLogin ? 'Login' : 'Signup'),
+                  onPressed: _trySubmit,
                 ),
-                if (widget.isLoading) CircularProgressIndicator(),
-                if (!widget.isLoading)
-                  RaisedButton(
-                    child: Text(_isLogin ? 'Login' : 'Signup'),
-                    onPressed: _trySubmit,
-                  ),
-                if (!widget.isLoading)
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    child: Text(_isLogin
-                        ? 'Create new account'
-                        : 'I already have an account'),
-                    onPressed: () {
-                      setState(
-                        () {
-                          _isLogin = !_isLogin;
-                        },
-                      );
-                    },
-                  ),
-              ],
-            ),
+              if (!widget.isLoading)
+                FlatButton(
+                  textColor: Theme.of(context).primaryColor,
+                  child: Text(_isLogin
+                      ? 'Create new account'
+                      : 'I already have an account'),
+                  onPressed: () {
+                    setState(
+                      () {
+                        _isLogin = !_isLogin;
+                      },
+                    );
+                  },
+                ),
+            ],
           ),
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/course_material.dart';
 import 'package:ewebclass/screen/profile.dart';
+import 'package:ewebclass/screen/quizzesAndAssignments.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -24,7 +25,7 @@ class MyDrawer extends StatelessWidget {
             ),
             child: Text('E-Web Class'),
           ),
-          Divider(),
+          // Divider(),
           ListTile(
             title: Text('Profile'),
             onTap: () {
@@ -41,7 +42,10 @@ class MyDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             title: Text('Quizzes-Assignments'),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context)
+                  .popAndPushNamed(QuizAndAssignmentScreen.routeName);
+            },
           ),
           Divider(),
           ListTile(
