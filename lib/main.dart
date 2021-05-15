@@ -2,6 +2,7 @@ import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/course_material.dart';
 import 'package:ewebclass/screen/home.dart';
 import 'package:ewebclass/screen/profile.dart';
+import 'package:ewebclass/screen/quizzesAndAssignments.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       //     // HomePage()
       //   },
       // ),
-      
+
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, userSnapshot) {
@@ -54,8 +55,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // '/': (context) => AuthPage(),
         ProfilePage.profileRoute: (context) => ProfilePage(),
-        CourseMaterials.routeName : (context) => CourseMaterials() 
-
+        CourseMaterials.routeName: (context) => CourseMaterials(),
+        QuizAndAssignmentScreen.routeName: (context) =>
+            QuizAndAssignmentScreen()
       },
     );
   }
