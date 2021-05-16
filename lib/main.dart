@@ -3,6 +3,7 @@ import 'package:ewebclass/screen/course_material.dart';
 import 'package:ewebclass/screen/home.dart';
 import 'package:ewebclass/screen/profile.dart';
 import 'package:ewebclass/screen/quizzesAndAssignments.dart';
+import 'package:ewebclass/utils.dart/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -17,17 +18,27 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
 
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final getcontroller = Get.put(StudentData());
+
+  @override
+  void initState() {
+    super.initState();
+    getcontroller.reSignIn();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, userSnapshot) {

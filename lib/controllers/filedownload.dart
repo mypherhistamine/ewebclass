@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 
 class FileDownloadController extends GetxController {
   var fileIsDownload = false.obs;
@@ -51,10 +51,10 @@ class FileDownloadController extends GetxController {
     String fileName,
     String cloudStorageLocation,
   }) async {
-    List<Directory> appDocDir = await getExternalStorageDirectories();
+    // List<Directory> appDocDir = await getExternalStorageDirectories();
     String path = "/storage/emulated/0/Download";
 
-    print(appDocDir);
+    // print(appDocDir);
     // File downloadToFile = File('${appDocDir[1].path}/hta.txt');
     File downloadToFile = File('$path/$cloudStorageLocation');
 

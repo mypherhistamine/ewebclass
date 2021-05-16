@@ -27,6 +27,7 @@ class MyDrawer extends StatelessWidget {
           ),
           // Divider(),
           ListTile(
+            leading: Icon(Icons.gamepad, color: Colors.blueAccent),
             title: Text('Profile'),
             onTap: () {
               Navigator.of(context).popAndPushNamed(ProfilePage.profileRoute);
@@ -34,6 +35,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.book, color: Colors.blueAccent),
             title: Text('Course Materials'),
             onTap: () {
               Navigator.of(context).popAndPushNamed(CourseMaterials.routeName);
@@ -41,6 +43,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.assessment, color: Colors.blueAccent),
             title: Text('Quizzes-Assignments'),
             onTap: () {
               Navigator.of(context)
@@ -48,17 +51,19 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           Divider(),
+          // ListTile(
+          //   title: Text('Discussion Interface'),
+          //   onTap: () {},
+          // ),
+          // Divider(),
           ListTile(
-            title: Text('Discussion Interface'),
-            onTap: () {},
-          ),
-          Divider(),
-          ListTile(
+            leading: Icon(Icons.help, color: Colors.blueAccent),
             title: Text('Help'),
             onTap: () {},
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.logout, color: Colors.redAccent),
             title: Text('Logout'),
             onTap: () {
               FirebaseAuth.instance.signOut();

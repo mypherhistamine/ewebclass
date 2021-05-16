@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 class CustomAissgmentCard extends StatefulWidget {
   final Assignment assignment;
+  final String docId;
 
-  const CustomAissgmentCard({Key key, this.assignment}) : super(key: key);
+  const CustomAissgmentCard({Key key, this.assignment, this.docId})
+      : super(key: key);
 
   @override
   _CustomAissgmentCardState createState() => _CustomAissgmentCardState();
@@ -49,9 +51,8 @@ class _CustomAissgmentCardState extends State<CustomAissgmentCard> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => UploadScreen(
-                              marks: widget.assignment.marks,
-                              dueDate: widget.assignment.dueDate,
-                              question: widget.assignment.question,
+                              docId: widget.docId,
+                              assignment: widget.assignment,
                             ),
                           ),
                         );

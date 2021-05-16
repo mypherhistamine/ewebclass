@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class StudentData extends GetxController {
@@ -55,7 +56,9 @@ class StudentData extends GetxController {
     print(city);
   }
 
-  void reSignIn(){
-    
+  void reSignIn() async {
+    var authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: "rishabhmishra23599@gmail.com", password: "Mypher@99");
+    authResultId.value = authResult.user.uid;
   }
 }
