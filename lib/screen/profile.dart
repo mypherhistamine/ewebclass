@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/edit_profile.dart';
 import 'package:ewebclass/widget/drawer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

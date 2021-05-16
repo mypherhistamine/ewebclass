@@ -1,8 +1,8 @@
-import 'dart:math';
+
 
 import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/home.dart';
-import 'package:ewebclass/utils.dart/theme.dart';
+import 'package:ewebclass/utils/theme.dart';
 import 'package:get/get.dart';
 
 import '../widget/authform.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class AuthPage extends StatefulWidget {
   @override

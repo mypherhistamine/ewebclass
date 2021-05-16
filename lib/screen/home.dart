@@ -1,4 +1,4 @@
-import 'package:ewebclass/screen/profile.dart';
+
 import 'package:ewebclass/widget/drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

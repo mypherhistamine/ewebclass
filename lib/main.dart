@@ -3,7 +3,7 @@ import 'package:ewebclass/screen/course_material.dart';
 import 'package:ewebclass/screen/home.dart';
 import 'package:ewebclass/screen/profile.dart';
 import 'package:ewebclass/screen/quizzesAndAssignments.dart';
-import 'package:ewebclass/utils.dart/theme.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
