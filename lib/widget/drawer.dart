@@ -1,5 +1,6 @@
 import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/course_material.dart';
+import 'package:ewebclass/screen/help.dart';
 import 'package:ewebclass/screen/profile.dart';
 import 'package:ewebclass/screen/quizzesAndAssignments.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,6 +52,17 @@ class MyDrawer extends StatelessWidget {
             },
           ),
           Divider(),
+
+          ListTile(
+            leading: Icon(Icons.help),
+            title: Text('Help'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Help()),
+              );
+            },
+          ),
           // ListTile(
           //   title: Text('Discussion Interface'),
           //   onTap: () {},
