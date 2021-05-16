@@ -41,7 +41,8 @@ class ProfilePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => EditProfileScreen()),
+                      builder: (context) => EditProfileScreen(),
+                    ),
                   );
                 })
           ],
@@ -51,17 +52,12 @@ class ProfilePage extends StatelessWidget {
           height: size.height,
           width: size.width,
           child: StreamBuilder<DocumentSnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(studentController.authResultId.value)
-                  .snapshots(),
-              builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                if (snapshot.hasData) {
-                  studentController.city.value = snapshot.data['city'];
-                  studentController.regNo.value = snapshot.data['regNo'];
-
-                  print(studentController.city.value);
-                }
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(studentController.authResultId.value)
+                .snapshots(),
+            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              if (snapshot.hasData) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -99,7 +95,10 @@ class ProfilePage extends StatelessWidget {
                     rightAlignText(text: "City - ${snapshot.data['city']}")
                   ],
                 );
-              }),
+              }
+              return Center(child: CircularProgressIndicator());
+            },
+          ),
         ),
         drawer: MyDrawer(context)
 

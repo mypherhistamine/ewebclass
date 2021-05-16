@@ -1,4 +1,5 @@
 import 'package:ewebclass/controllers/userdata.dart';
+import 'package:ewebclass/widget/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -52,6 +53,7 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Center(
       child: Container(
         padding: EdgeInsets.all(16),
@@ -235,9 +237,15 @@ class _AuthFormState extends State<AuthForm> {
               ),
               if (widget.isLoading) CircularProgressIndicator(),
               if (!widget.isLoading)
-                RaisedButton(
-                  child: Text(_isLogin ? 'Login' : 'Signup'),
-                  onPressed: _trySubmit,
+                CustomButton(
+                  cornerRadius: 60,
+                  height: 50,
+                  width: size.width * 0.7,
+                  buttonColor: Colors.blue,
+                  contentSize: 15,
+                  content: _isLogin ? 'Login' : 'Signup',
+                  function: _trySubmit,
+                  // onPressed: _trySubmit,
                 ),
               if (!widget.isLoading)
                 FlatButton(

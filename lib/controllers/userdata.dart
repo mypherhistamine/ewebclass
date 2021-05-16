@@ -54,4 +54,8 @@ class StudentData extends GetxController {
     print(mobileNo);
     print(city);
   }
+
+  void reSignIn(){
+    
+  }
 }

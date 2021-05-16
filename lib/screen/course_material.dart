@@ -62,43 +62,37 @@ class _CourseMaterialsState extends State<CourseMaterials> {
             //   ),
             // ),
             Expanded(
-              child: FutureBuilder(
-                future: fakeFuture,
-                builder: (ctx, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
+              child: StreamBuilder<QuerySnapshot>(
+                stream: docStream,
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  // var resilt = snapshot.data.docs;
+                  // print(resilt[1]['title']);
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("An Error Occured"),
+                    );
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemBuilder: (ctx, i) {
+                        return CustomCardBuilder(
+                          docModel: Documents(
+                            cloudStorageLocation: "loda",
+                            fileName: snapshot.data.docs[i]['title'],
+                            fileSize: snapshot.data.docs[i]['file_size'],
+                            iconToDisplay: snapshot.data.docs[i]['icon'],
+                          ),
+                          fileDownloaderController: fileDownloaderController,
+                          size: size,
+                          indexKey: i,
+                        );
+                      },
+                      itemCount: snapshot.data.docs.length,
+                    );
                   }
-                  return StreamBuilder<QuerySnapshot>(
-                    stream: docStream,
-                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                      // var resilt = snapshot.data.docs;
-                      // print(resilt[1]['title']);
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text("An Error Occured"),
-                        );
-                      } else if (snapshot.hasData) {
-                        return ListView.builder(
-                          itemBuilder: (ctx, i) {
-                            return CustomCardBuilder(
-                              docModel: Documents(
-                                cloudStorageLocation: "loda",
-                                fileName: snapshot.data.docs[i]['title'],
-                                fileSize: snapshot.data.docs[i]['file_size'],
-                                iconToDisplay: snapshot.data.docs[i]['icon'],
-                              ),
-                              fileDownloaderController:
-                                  fileDownloaderController,
-                              size: size,
-                              indexKey: i,
-                            );
-                          },
-                          itemCount: snapshot.data.docs.length,
-                        );
-                      }
-                      return Container();
-                    },
-                  );
+                  return Container();
                 },
               ),
             )

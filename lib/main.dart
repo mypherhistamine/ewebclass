@@ -28,19 +28,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // initialRoute: '/',
-      // home: Obx(
-      //   () {
-      //     if (getcontroller.userloggedIn.value == true) {
-      //       return HomePage();
-      //     } else {
-      //       return AuthPage();
-      //     }
-
-      //     // HomePage()
-      //   },
-      // ),
-
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, userSnapshot) {
@@ -51,7 +38,6 @@ class MyApp extends StatelessWidget {
           return AuthPage();
         },
       ),
-
       routes: {
         // '/': (context) => AuthPage(),
         ProfilePage.profileRoute: (context) => ProfilePage(),

@@ -1,3 +1,5 @@
+import 'package:ewebclass/model/assignment.dart';
+import 'package:ewebclass/widget/assignmentWidget.dart';
 import 'package:ewebclass/widget/drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +17,34 @@ class _QuizAndAssignmentScreenState extends State<QuizAndAssignmentScreen> {
     return Scaffold(
       drawer: MyDrawer(context),
       appBar: AppBar(
-        title: Text("Quizzes and Assignments"),
+        title: Text("Assignments"),
       ),
       body: Container(
         height: size.height,
         width: size.width,
         child: Column(
-          children: [],
+          children: [
+            Expanded(
+              child: StreamBuilder<dynamic>(
+                stream: null,
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemBuilder: (ctx, i) {
+                      return CustomAissgmentCard(
+                        assignment: Assignment(
+                            title: "LAB ASSIGNMENT - 5",
+                            subject: "Network and Communication",
+                            marks: "10th",
+                            dueDate: "23 May",
+                            question: "Lol"),
+                      );
+                    },
+                    itemCount: 2,
+                  );
+                }
+              ),
+            )
+          ],
         ),
       ),
     );
