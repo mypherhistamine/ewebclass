@@ -14,6 +14,8 @@ class StudentData extends GetxController {
   var authResultId = ''.obs;
   var hasSubmitted = false.obs;
   var userloggedIn = false.obs;
+  final _authRef = FirebaseAuth.instance;
+  var userEmailIdForAuth = ''.obs;
 
   void submitDetails() {
     if (!hasSubmitted.value) {
@@ -56,9 +58,26 @@ class StudentData extends GetxController {
     print(city);
   }
 
-  void reSignIn() async {
+  Future<void> reSignIn() async {
     var authResult = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: "rishabhmishra23599@gmail.com", password: "Mypher@99");
     authResultId.value = authResult.user.uid;
+  }
+
+  Future<void> resetPassword({String email}) async {
+    await _authRef.sendPasswordResetEmail(email: email);
+
+    // await _authRef.confirmPasswordReset(code: code, newPassword: newPassword);
+  }
+
+  void deleteUSer() async {
+    try {
+      await FirebaseAuth.instance.currentUser.delete();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        print(
+            'The user must reauthenticate before this operation can be executed.');
+      }
+    }
   }
 }

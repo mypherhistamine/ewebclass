@@ -3,6 +3,7 @@ import 'package:ewebclass/screen/course_material.dart';
 import 'package:ewebclass/screen/help.dart';
 import 'package:ewebclass/screen/profile.dart';
 import 'package:ewebclass/screen/quizzesAndAssignments.dart';
+import 'package:ewebclass/screen/reset_password.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -45,7 +46,16 @@ class MyDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.assessment, color: Colors.blueAccent),
-            title: Text('Quizzes-Assignments'),
+            title: Text('Assignments'),
+            onTap: () {
+              Navigator.of(context)
+                  .popAndPushNamed(QuizAndAssignmentScreen.routeName);
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.assessment, color: Colors.blueAccent),
+            title: Text('Quizzes'),
             onTap: () {
               Navigator.of(context)
                   .popAndPushNamed(QuizAndAssignmentScreen.routeName);
@@ -54,7 +64,7 @@ class MyDrawer extends StatelessWidget {
           Divider(),
 
           ListTile(
-            leading: Icon(Icons.help),
+            leading: Icon(Icons.help, color: Colors.blueAccent),
             title: Text('Help'),
             onTap: () {
               Navigator.push(
@@ -63,16 +73,22 @@ class MyDrawer extends StatelessWidget {
               );
             },
           ),
-          // ListTile(
-          //   title: Text('Discussion Interface'),
-          //   onTap: () {},
-          // ),
-          // Divider(),
+          Divider(),
           ListTile(
-            leading: Icon(Icons.help, color: Colors.blueAccent),
-            title: Text('Help'),
-            onTap: () {},
+            leading: Icon(
+              Icons.reset_tv,
+              color: Colors.blueAccent,
+            ),
+            title: Text('Account Settings'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ResetPasswordPage()),
+              );
+            },
           ),
+          // Divider(),
+
           Divider(),
           ListTile(
             leading: Icon(Icons.logout, color: Colors.redAccent),

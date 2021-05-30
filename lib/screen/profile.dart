@@ -12,6 +12,8 @@ class ProfilePage extends StatelessWidget {
   static const profileRoute = "profileRoute";
   final studentController = Get.put(StudentData());
   CollectionReference users = FirebaseFirestore.instance.collection('users');
+  String profile_url =
+      "https://firebasestorage.googleapis.com/v0/b/e-web-class.appspot.com/o/profile_pics%2Fme.jpeg?alt=media&token=457ddb97-98c9-42c2-a900-a996ab131b97";
 
   Widget rightAlignText({String text}) {
     return Row(
@@ -69,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(120),
                         child: Container(
                           child: Image.network(
-                            "https://i.ibb.co/vVRHdMy/me.jpg",
+                            "$profile_url",
                             fit: BoxFit.fill,
                           ),
                         ),

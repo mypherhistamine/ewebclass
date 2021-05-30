@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final double height;
-  final double width;
-  final double cornerRadius;
-  final Function function;
-  final String content;
+  double height = 50;
+  double width = 150;
+  double cornerRadius = 10;
+  Function function = () {
+    print("Custom Button pressed !");
+  };
+  String content = "A Button";
   Color buttonColor = Colors.green;
   double contentSize = 14;
   Color textColor = Colors.white;

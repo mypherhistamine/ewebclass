@@ -81,6 +81,7 @@ class _UploadScreenState extends State<UploadScreen> {
       ),
     );
   }
+
   @override
   void initState() {
     super.initState();
@@ -93,7 +94,9 @@ class _UploadScreenState extends State<UploadScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Upload document'),
+      ),
       body: SingleChildScrollView(
         child: Container(
           height: size.height,

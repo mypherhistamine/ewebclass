@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ewebclass/controllers/userdata.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,16 +10,35 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final userDataController = Get.put(StudentData());
+  final firebaseRef = FirebaseFirestore.instance.collection("users");
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
-    nameController.text = userDataController.userName.value;
-    regController.text = userDataController.regNo.value;
-    schController.text = userDataController.school.value;
-    emailController.text = userDataController.userEmail.value;
-    phoneController.text = userDataController.mobileNo.value;
-    addressController.text = userDataController.address.value;
-    cityController.text = userDataController.city.value;
+    initFields();
+  }
+
+  void initFields() async {
+    firebaseRef
+        .doc('${userDataController.authResultId.value}')
+        .get()
+        .then((value) {
+      // print(value.data());
+      // regController.text = value.data()['regNo'];
+      // schController.text = value.data()['school'];
+      // emailController.text = value.data()['email'];
+      // phoneController.text = value.data()['mobileNo'];
+      // addressController.text = value.data()['address'];
+      // cityController.text = value.data()['city'];
+    });
+
+    // regController.text = userDataController.regNo.value;
+    // schController.text = userDataController.school.value;
+    // emailController.text = userDataController.userEmail.value;
+    // phoneController.text = userDataController.mobileNo.value;
+    // addressController.text = userDataController.address.value;
+    // cityController.text = userDataController.city.value;
   }
 
   TextEditingController nameController = new TextEditingController();
@@ -33,14 +53,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   bool isSubmitting = false;
 
   @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    regController.dispose();
+    schController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    cityController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          height: 700,
-          child: Card(
+          // height: 700,
+          child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 // Container(
@@ -64,7 +97,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Container(
                   child: Card(
                     elevation: 8,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return "This filed can't be empty";
+                        }
+                      },
                       decoration: InputDecoration(
                           labelText: 'Name',
                           contentPadding: EdgeInsets.all(10),
@@ -75,27 +113,46 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
 
+                // Container(
+                //   height: 60,
+                //   child: Card(
+                //     elevation: 8,
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(10.0),
+                //       child: Row(
+                //         children: [
+                //           Text(
+                //             "${regController.text}",
+                //             style:
+                //                 TextStyle(fontSize: 16, color: Colors.black38),
+                //           ),
+                //           SizedBox(width: 10),
+                //           Text(
+                //             "*This field can't be changed",
+                //             style: TextStyle(
+                //                 fontSize: 16, color: Colors.redAccent),
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
+
                 Container(
-                  height: 60,
                   child: Card(
                     elevation: 8,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            "${getXController.regNo.toUpperCase()}",
-                            style:
-                                TextStyle(fontSize: 16, color: Colors.black38),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            "*This field can't be changed",
-                            style: TextStyle(
-                                fontSize: 16, color: Colors.redAccent),
-                          )
-                        ],
-                      ),
+                    child: TextFormField(
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return "This filed can't be empty";
+                        }
+                      },
+                      decoration: InputDecoration(
+                          labelText: 'Registration Number',
+                          contentPadding: EdgeInsets.all(10),
+                          hintText: 'School',
+                          border: InputBorder.none),
+                      controller: regController,
                     ),
                   ),
                 ),
@@ -103,7 +160,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Container(
                   child: Card(
                     elevation: 8,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return "This filed can't be empty";
+                        }
+                      },
                       decoration: InputDecoration(
                           labelText: 'School',
                           contentPadding: EdgeInsets.all(10),
@@ -116,7 +178,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Container(
                   child: Card(
                     elevation: 8,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return "This filed can't be empty";
+                        }
+                      },
                       decoration: InputDecoration(
                           labelText: 'Email',
                           contentPadding: EdgeInsets.all(10),
@@ -129,7 +196,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Container(
                   child: Card(
                     elevation: 8,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return "This filed can't be empty";
+                        }
+                      },
                       decoration: InputDecoration(
                           labelText: 'Contact No',
                           contentPadding: EdgeInsets.all(10),
@@ -142,7 +214,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Container(
                   child: Card(
                     elevation: 8,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return "This filed can't be empty";
+                        }
+                      },
                       decoration: InputDecoration(
                           labelText: 'Address',
                           contentPadding: EdgeInsets.all(10),
@@ -155,7 +232,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Container(
                   child: Card(
                     elevation: 8,
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (text) {
+                        if (text.isEmpty) {
+                          return "This filed can't be empty";
+                        }
+                      },
                       decoration: InputDecoration(
                           labelText: 'City',
                           contentPadding: EdgeInsets.all(10),
@@ -170,37 +252,42 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         padding: const EdgeInsets.only(top: 50),
                         child: ElevatedButton(
                             onPressed: () async {
-                              setState(() {
-                                isSubmitting = true;
-                              });
-                              userDataController.userName.value =
-                                  nameController.text;
+                              if (_formKey.currentState.validate()) {
+                                setState(() {
+                                  isSubmitting = true;
+                                });
+                                userDataController.userName.value =
+                                    nameController.text;
+                                userDataController.city.value =
+                                    cityController.text;
+                                userDataController.regNo.value =
+                                    regController.text;
+                                userDataController.school.value =
+                                    schController.text;
+                                userDataController.userEmail.value =
+                                    emailController.text;
+                                userDataController.mobileNo.value =
+                                    phoneController.text;
+                                userDataController.address.value =
+                                    addressController.text;
 
-                              userDataController.school.value =
-                                  schController.text;
-                              userDataController.userEmail.value =
-                                  emailController.text;
-                              userDataController.mobileNo.value =
-                                  phoneController.text;
-                              userDataController.address.value =
-                                  addressController.text;
-
-                              userDataController.ocenia();
-                              await userDataController.changeDetails();
-                              setState(() {
-                                isSubmitting = false;
-                              });
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                backgroundColor: Colors.blueAccent,
-                                content:
-                                    const Text('Your Profile has been updated'),
-                                duration: const Duration(seconds: 2),
-                                // action: SnackBarAction(
-                                //   label: 'Your Profile has been updated',
-                                //   onPressed: () {},
-                                // ),
-                              ));
+                                userDataController.ocenia();
+                                await userDataController.changeDetails();
+                                setState(() {
+                                  isSubmitting = false;
+                                });
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  backgroundColor: Colors.blueAccent,
+                                  content: const Text(
+                                      'Your Profile has been updated'),
+                                  duration: const Duration(seconds: 2),
+                                  // action: SnackBarAction(
+                                  //   label: 'Your Profile has been updated',
+                                  //   onPressed: () {},
+                                  // ),
+                                ));
+                              }
                             },
                             child: Text("Edit Profile")),
                       )
@@ -209,13 +296,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: CircularProgressIndicator(),
                       ),
                 SizedBox(height: 10),
-                Container(
-                  width: 300,
-                  child: Text(
-                    " * Your registration number is managed by your organization. To change your registration number please contact the the admin, for more details check the help section ",
-                    style: TextStyle(fontSize: 16, color: Colors.redAccent),
-                  ),
-                )
+                // Container(
+                //   width: 300,
+                //   child: Text(
+                //     " * Your registration number is managed by your organization. To change your registration number please contact the the admin, for more details check the help section ",
+                //     style: TextStyle(fontSize: 16, color: Colors.redAccent),
+                //   ),
+                // )
               ],
             ),
           ),

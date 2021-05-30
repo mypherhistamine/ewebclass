@@ -1,5 +1,3 @@
-
-
 import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/home.dart';
 import 'package:ewebclass/utils/theme.dart';
@@ -10,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class AuthPage extends StatefulWidget {
   @override
@@ -43,6 +40,7 @@ class _AuthPageState extends State<AuthPage> {
         authResult = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
         getXController.authResultId.value = authResult.user.uid;
+
         getXController.hasSubmitted.value = true;
         getXController.userloggedIn.value = true;
         getXController.submitDetails();

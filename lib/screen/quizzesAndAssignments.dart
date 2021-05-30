@@ -35,35 +35,36 @@ class _QuizAndAssignmentScreenState extends State<QuizAndAssignmentScreen> {
           children: [
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                  stream: assignmentStream,
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      return Center(child: Text("Some error occured ! "));
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemBuilder: (ctx, i) {
-                          return CustomAissgmentCard(
-                            docId: snapshot.data.docs[i].id,
-                            assignment: Assignment(
-                                title: snapshot.data.docs[i]['title'],
-                                subject: snapshot.data.docs[i]['subject'],
-                                marks: snapshot.data.docs[i]['marks'],
-                                dueDate: snapshot.data.docs[i]['dueDate'],
-                                question: snapshot.data.docs[i]['question'],
-                                hasSubmitted: snapshot.data.docs[i]
-                                    ['hasSubmitted'],
-                                subjectCode: snapshot.data.docs[i]
-                                    ['subjectCode']),
-                          );
-                        },
-                        itemCount: snapshot.data.docs.length,
-                      );
-                    }
-                    return Container();
-                  }),
+                stream: assignmentStream,
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(child: Text("Some error occured ! "));
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemBuilder: (ctx, i) {
+                        return CustomAissgmentCard(
+                          docId: snapshot.data.docs[i].id,
+                          assignment: Assignment(
+                              title: snapshot.data.docs[i]['title'],
+                              subject: snapshot.data.docs[i]['subject'],
+                              marks: snapshot.data.docs[i]['marks'],
+                              dueDate: snapshot.data.docs[i]['dueDate'],
+                              question: snapshot.data.docs[i]['question'],
+                              hasSubmitted: snapshot.data.docs[i]
+                                  ['hasSubmitted'],
+                              subjectCode: snapshot.data.docs[i]
+                                  ['subjectCode']),
+                        );
+                      },
+                      itemCount: snapshot.data.docs.length,
+                    );
+                  }
+                  return Container();
+                },
+              ),
             )
           ],
         ),

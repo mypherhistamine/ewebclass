@@ -27,11 +27,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final getcontroller = Get.put(StudentData());
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   void initState() {
     super.initState();
-    getcontroller.reSignIn();
+    // getcontroller.reSignIn();
+    // setAuthID();
+  }
+
+  void setAuthID() {
+    // if (auth.currentUser.uid != null) {
+      // getcontroller.authResultId.value = auth.currentUser.uid;
+      // print(getcontroller.authResultId);
+    // }
   }
 
   @override
@@ -39,11 +48,12 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: StreamBuilder(
+      home: StreamBuilder<User>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, userSnapshot) {
+        builder: (context, AsyncSnapshot<User> userSnapshot) {
           if (userSnapshot.hasData) {
             //return ChatPage();
+
             return HomePage();
           }
           return AuthPage();
