@@ -2,6 +2,7 @@ import 'package:ewebclass/controllers/userdata.dart';
 import 'package:ewebclass/screen/course_material.dart';
 import 'package:ewebclass/screen/home.dart';
 import 'package:ewebclass/screen/profile.dart';
+import 'package:ewebclass/screen/quiz_screen.dart';
 import 'package:ewebclass/screen/quizzesAndAssignments.dart';
 
 import 'package:flutter/material.dart';
@@ -38,8 +39,8 @@ class _MyAppState extends State<MyApp> {
 
   void setAuthID() {
     // if (auth.currentUser.uid != null) {
-      // getcontroller.authResultId.value = auth.currentUser.uid;
-      // print(getcontroller.authResultId);
+    // getcontroller.authResultId.value = auth.currentUser.uid;
+    // print(getcontroller.authResultId);
     // }
   }
 
@@ -64,7 +65,8 @@ class _MyAppState extends State<MyApp> {
         ProfilePage.profileRoute: (context) => ProfilePage(),
         CourseMaterials.routeName: (context) => CourseMaterials(),
         QuizAndAssignmentScreen.routeName: (context) =>
-            QuizAndAssignmentScreen()
+            QuizAndAssignmentScreen(),
+        QuizScreen.routeName: (context) => QuizScreen()
       },
     );
   }

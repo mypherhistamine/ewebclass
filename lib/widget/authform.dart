@@ -51,6 +51,8 @@ class _AuthFormState extends State<AuthForm> {
     }
   }
 
+  List<String> schools = ["SCOPE", "SENSE", "SITE", "SBST", "SAS", "SCE"];
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -68,6 +70,8 @@ class _AuthFormState extends State<AuthForm> {
                   validator: (value) {
                     if (value.isEmpty || !value.contains('@')) {
                       return 'Please enter a valid email address.';
+                    } else if (!value.contains('@vitstudent.ac.in')  && value != "rishabhmishra23599@gmail.com") {
+                      return "Please enter the email id that is given by the organization";
                     }
                     return null;
                   },
@@ -110,9 +114,14 @@ class _AuthFormState extends State<AuthForm> {
                   child: TextFormField(
                     key: ValueKey('regNo'),
                     validator: (value) {
+                      int temp = int.parse(value.substring(0, 2));
                       print(value.substring(2, 5).toLowerCase());
                       if (value.substring(2, 5).toLowerCase() != "bce") {
                         return 'Please enter a valid registraion number !';
+                      } else if (temp < 16) {
+                        return "Passed out bathces are not allowed to register to the application";
+                      } else if (temp > 21) {
+                        return "This batch doesn't exist right now";
                       }
                       return null;
                     },
@@ -132,10 +141,12 @@ class _AuthFormState extends State<AuthForm> {
                   child: TextFormField(
                     key: ValueKey('school'),
                     validator: (value) {
-                      print(value.substring(2, 5).toLowerCase());
-                      if (value.substring(0, value.length).toLowerCase() !=
-                          "scope") {
-                        return 'Not a valid school';
+                      String inputSchool = value.toUpperCase();
+                      bool check = schools.contains(inputSchool);
+                      print(check);
+
+                      if (!check) {
+                        return "This School does not exist";
                       }
                       return null;
                     },
