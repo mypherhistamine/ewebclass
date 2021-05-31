@@ -16,7 +16,7 @@ class _CourseMaterialsState extends State<CourseMaterials> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    var fileIsDownloading = false;
+    // var fileIsDownloading = false;
     final fileDownloaderController = Get.put(FileDownloadController());
     final authController = Get.put(StudentData());
     final docStream = FirebaseFirestore.instance
@@ -25,18 +25,18 @@ class _CourseMaterialsState extends State<CourseMaterials> {
         .collection("class_materials")
         .snapshots();
 
-    final docFuture = FirebaseFirestore.instance
-        .collection('users')
-        .doc(authController.authResultId.value)
-        .collection("class_materials")
-        .get();
+    // final docFuture = FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(authController.authResultId.value)
+    //     .collection("class_materials")
+    //     .get();
 
-    final fakeFuture = Future.delayed(Duration(seconds: 3));
+    // final fakeFuture = Future.delayed(Duration(seconds: 3));
 
-    @override
-    void dispose() {
-      super.dispose();
-    }
+    // @override
+    // void dispose() {
+    //   super.dispose();
+    // }
 
     return Scaffold(
       appBar: AppBar(

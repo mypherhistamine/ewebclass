@@ -9,7 +9,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String welcomeString = "Welcome to the E-Web Class Portal\n\n";
+  String welcomeString =
+      "Welcome to the E-Web Class Portal\n\nSlide your finger to the left to know more";
+
+  String helpString =
+      "If you get stuck at any time you can always go to the help section.";
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +57,15 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: MyDrawer(context),
       body: Container(
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //       image: AssetImage(
+        //         'assets/images/e_class2.jpg',
+        //       ),
+        //       colorFilter: new ColorFilter.mode(
+        //           Colors.black.withOpacity(0.2), BlendMode.dstATop),
+        //       fit: BoxFit.fill),
+        // ),
         height: size.height,
         width: size.width,
         padding: EdgeInsets.only(top: 20, left: 20),
@@ -64,6 +77,11 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(
                   fontSize: 23, color: Theme.of(context).primaryColor),
             ),
+            SizedBox(height: 20),
+            Text(
+              '$helpString',
+              style: TextStyle(color: Colors.black),
+            )
           ],
         ),
       ),

@@ -31,9 +31,12 @@ class _QuizScreenState extends State<QuizScreen> {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (ctx, index) {
-                  return CustomQuizCard();
+                  return CustomQuizCard(
+                    quizSubject: "Human Computer Interaction",
+                    quizTitle: "Quiz - 1",
+                  );
                 },
-                itemCount: 2,
+                itemCount: 1,
               ),
             )
           ],
@@ -44,7 +47,13 @@ class _QuizScreenState extends State<QuizScreen> {
 }
 
 class CustomQuizCard extends StatefulWidget {
-  const CustomQuizCard({Key key}) : super(key: key);
+  String quizTitle;
+  String quizSubject;
+  String subjectCode;
+  String quizDate;
+
+  CustomQuizCard(
+      {this.quizTitle, this.quizSubject, this.quizDate, this.subjectCode});
 
   @override
   _CustomQuizCardState createState() => _CustomQuizCardState();
@@ -64,9 +73,9 @@ class _CustomQuizCardState extends State<CustomQuizCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("assignment.title", style: TextStyle(fontSize: 20)),
+              Text("Quiz 1", style: TextStyle(fontSize: 20)),
               SizedBox(height: 10),
-              Text('assignment.subject'),
+              Text('Human Computer and Interaction'),
               Spacer(),
               Container(
                 margin: EdgeInsets.only(right: 15, bottom: 15),
@@ -75,7 +84,7 @@ class _CustomQuizCardState extends State<CustomQuizCard> {
                     Spacer(),
                     CustomButton(
                       buttonColor: Colors.blue,
-                      content: "More Info",
+                      content: "Start Quiz",
                       contentSize: 15,
                       cornerRadius: 20,
                       function: () {

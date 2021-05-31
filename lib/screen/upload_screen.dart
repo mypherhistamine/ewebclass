@@ -90,6 +90,25 @@ class _UploadScreenState extends State<UploadScreen> {
     });
   }
 
+  Future showCompletionDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text('Assignment Uploaded'),
+        content: Text('Your file has been uploaded !'),
+        actions: <Widget>[
+          new ElevatedButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true)
+                  .pop(); // dismisses only the dialog and returns nothing
+            },
+            child: new Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -147,7 +166,7 @@ class _UploadScreenState extends State<UploadScreen> {
                   } else if (snapshot.hasData) {
                     print(snapshot.data['title']);
 
-                    return !snapshot.data['hasSubmitted']
+                    return !isSubmitting
                         ? Center(
                             child: CustomButton(
                               textColor: Colors.white,
@@ -173,10 +192,17 @@ class _UploadScreenState extends State<UploadScreen> {
                                     ),
                                   );
                                 } else if (fileNameController.text != null) {
+                                  setState(() {
+                                    isSubmitting = true;
+                                  });
                                   await assignmentController.submitWork(
                                     fileName: fileNameController.text,
                                     context: context,
                                   );
+                                  setState(() {
+                                    isSubmitting = false;
+                                  });
+                                  await showCompletionDialog(context);
                                 }
                               },
                             ),

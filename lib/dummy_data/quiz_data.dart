@@ -128,9 +128,10 @@ class Quiz extends GetxController {
         Option(isCorrectAns: false, optionText: "none")
       ],
     ),
-     Question(
+    Question(
       marks: 1,
-      question: "The user output in human computer interaction is happens through",
+      question:
+          "The user output in human computer interaction is happens through",
       options: [
         Option(isCorrectAns: true, optionText: "motor controls"),
         Option(isCorrectAns: false, optionText: "experience"),
@@ -138,7 +139,7 @@ class Quiz extends GetxController {
         Option(isCorrectAns: false, optionText: "education")
       ],
     ),
-     Question(
+    Question(
       marks: 1,
       question: "The optical illusion used in deisngs effects page is",
       options: [
@@ -172,7 +173,7 @@ Question: ${questions[i].question}
     }
   }
 
-  int calculateMarks(List<Question> questions2) {
+  int calculateMarks({List<Question> questions2}) {
     int score = 0;
     // for (int i = 0; i < questions2.length; i++) {
     //   for (int j = 0; j < questions2[i].options.length; j++) {
@@ -183,7 +184,7 @@ Question: ${questions[i].question}
     //   }
     // }
 
-    questions2.forEach((Question singleQuestion) {
+    questions.forEach((Question singleQuestion) {
       singleQuestion.options.forEach((Option singleOption) {
         if (singleOption.isCorrectAns &&
             singleOption.userHasSelectedThisOption) {

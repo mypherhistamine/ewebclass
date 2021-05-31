@@ -94,14 +94,25 @@ class _AuthPageState extends State<AuthPage> {
         child: Container(
           height: size.height,
           width: size.width,
-          decoration: BoxDecoration(color: Utils.bgColor2
-              // gradient: LinearGradient(
-              //     transform: GradientRotation(pi / 2), colors: Utils.bgColor)
-              // image: DecorationImage(
-              //   fit: BoxFit.fill,
-              //   image: AssetImage('assets/images/bg.jpg'),
-              // ),
-              ),
+          // decoration: BoxDecoration(
+          //   // color: Utils.bgColor2
+          //     // gradient: LinearGradient(
+          //     //     transform: GradientRotation(pi / 2), colors: Utils.bgColor)
+          //     // image: DecorationImage(
+          //     //   fit: BoxFit.fill,
+          //     //   image: AssetImage('assets/images/bg.jpg'),
+          //     // ),
+          //     ),
+
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  'assets/images/e_class2.jpg',
+                ),
+                colorFilter: new ColorFilter.mode(
+                    Colors.black.withOpacity(0.2), BlendMode.dstATop),
+                fit: BoxFit.fill),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

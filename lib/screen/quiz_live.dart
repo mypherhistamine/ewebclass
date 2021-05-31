@@ -63,8 +63,9 @@ class _QuizLiveScreenState extends State<QuizLiveScreen> {
               cornerRadius: 5,
               content: "Submit",
               contentSize: 15,
-              function: () {
-                controller.calculateMarks(controller.questions);
+              function: () async {
+                controller.calculateMarks();
+                await showCompletionDialog(context, controller: controller);
               },
               height: 40,
             )
@@ -75,8 +76,62 @@ class _QuizLiveScreenState extends State<QuizLiveScreen> {
   }
 }
 
+Future showCompletionDialog(BuildContext context, {Quiz controller}) {
+  return showDialog(
+    context: context,
+    builder: (context) => new AlertDialog(
+      title: new Text('Submit Quiz'),
+      content: Text(
+          'Your still have time left are you sure you want to submit the quiz ? '),
+      actions: <Widget>[
+        new ElevatedButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true)
+                .pop(); // dismisses only the dialog and returns nothing
+          },
+          child: new Text('Continue Quiz'),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            int marks = controller.calculateMarks();
+            Navigator.of(context, rootNavigator: true).pop();
+            await showMarksDialog(context, marks: marks);
+          },
+          child: new Text('Submit'),
+        ),
+      ],
+    ),
+  );
+}
+
+Future showMarksDialog(BuildContext context, {int marks}) {
+  return showDialog(
+    context: context,
+    builder: (context) => new AlertDialog(
+      title: new Text('Quiz Score'),
+      content: Text('You scored $marks/10'),
+      actions: <Widget>[
+        new ElevatedButton(
+          onPressed: () {
+            Navigator.of(context, rootNavigator: true).pop();
+            Navigator.of(context, rootNavigator: true).pop();
+            // dismisses only the dialog and returns nothing
+          },
+          child: new Text('Ok'),
+        ),
+        // new ElevatedButton(
+        //   onPressed: () {
+        //     controller.calculateMarks();
+        //   },
+        //   child: new Text('Submit'),
+        // ),
+      ],
+    ),
+  );
+}
+
 class CustomQuestionCard extends StatefulWidget {
-  Question question;
+  final Question question;
   final index;
 
   CustomQuestionCard(this.question, {this.index});
@@ -202,6 +257,13 @@ class _TimerWidgetState extends State<TimerWidget> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    myTimer.cancel();
   }
 
   @override
